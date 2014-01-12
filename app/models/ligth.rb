@@ -4,8 +4,8 @@ include PiPiper
 class Ligth
   attr_accessor :pin
 
-  def initialize
-    @pin = PiPiper::Pin.new(:pin => 18, :direction => :out)
+  def initialize pin
+    @pin = PiPiper::Pin.new(:pin => pin, :direction => :out)
   end
 
   def on
@@ -15,4 +15,21 @@ class Ligth
   def off
     @pin.off
   end
+
+  def on?
+    @pin.read == 1
+  end
+
+  def off?
+    @pin.read == 0
+  end
+
+  def press
+    if on?
+      off
+    else
+      on
+    end
+  end
+
 end
